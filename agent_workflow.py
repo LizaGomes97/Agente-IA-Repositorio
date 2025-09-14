@@ -8,8 +8,7 @@ from langchain_core.messages import SystemMessage, HumanMessage
 
 # Importa a função RAG e a chave de API
 from rag_pipeline import perguntar_informacoes_RAG
-from langchain_huggingface import HuggingFaceEndpoint
-from config import GOOGLE_API_KEY, HUGGINGFACEHUB_API_TOKEN
+from config import GOOGLE_API_KEY
 
 # --- 1. Definição do Estado do Agente e Modelos de Saída ---
 
@@ -43,12 +42,7 @@ TRIAGEM_PROMPT = """
     - **ENVIAR_EMAIL**: Após encerrar o atendimento do usuario ou quando o usuario pede para entrar em contato com Lizandra (Ex:"Gostaria de conversar com você", "Tenho uma proposta para voce")
 """
 
-llm_triagem = HuggingFaceEndpoint(
-    repo_id="google/gemma-2-9b-it",
-    max_length=256, # Menor para a tarefa de triagem
-    temperature=0,
-    huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
-)
+llm_triagem = ChatGoogleGenerativeAI(model='gemini-1.5-flash', temperature=0, api_key=GOOGLE_API_KEY)
 triagem_chain = llm_triagem.with_structured_output(TriagemOut)
 
 def triagem(mensagem: str) -> dict:

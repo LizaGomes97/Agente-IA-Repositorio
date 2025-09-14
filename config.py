@@ -8,7 +8,6 @@ load_dotenv()
 # Pega a chave da API do ambiente.
 # Certifique-se de ter um arquivo .env ou de configurar a variável de ambiente no seu sistema.
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 # Se a chave não for encontrada, você pode descomentar a linha abaixo
 # e colocar sua chave diretamente, mas evite fazer isso em repositórios públicos.
